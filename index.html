@@ -61,7 +61,7 @@
             </div>
 
             <div class="flex items-center space-x-4">
-                <a href="tel:+79994437948" class="hidden sm:block text-sm font-bold hover:text-orange-500 transition">+7 (999) 443-79-48</a>
+                <!-- <a href="tel:+79994437948" class="hidden sm:block text-sm font-bold hover:text-orange-500 transition">+7 (999) 443-79-48</a> -->
                 <button id="mobile-menu-btn" class="md:hidden text-zinc-100 focus:outline-none">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
@@ -196,9 +196,9 @@
                 <!-- Товар 1 -->
                 <div class="group relative bg-zinc-950 border border-zinc-800 p-2 overflow-hidden transition-all hover:border-orange-500/50">
                     <div class="relative h-[400px] overflow-hidden bg-zinc-900 cursor-pointer" onclick="openSlider('CRAFT')">
-                        <img src="img/ТИТАН-М.png"
+                        <img src="img/ТИТАН-М/ТИТАН-М.png"
                              alt="[Верстак ТИТАН-М]" 
-                             class="w-full h-full object-cover transition duration-700 group-hover:scale-105 group-hover:opacity-80">
+                             class="w-full h-full object-cover scale-[1.2] transition duration-700 group-hover:scale-125 group-hover:opacity-80">
                     </div>
                     <div class="p-8">
                         <div class="flex justify-between items-start mb-4">
@@ -221,9 +221,9 @@
                 <!-- Товар 2 -->
                 <div class="group relative bg-zinc-950 border border-zinc-800 p-2 overflow-hidden transition-all hover:border-orange-500/50">
                     <div class="relative h-[400px] overflow-hidden bg-zinc-900 cursor-pointer" onclick="openSlider('TITAN')">
-                        <img src="img/Стеллаж.png"
+                        <img src="img/СТАЛВОРД/СТАЛВОРД.jpg"
                              alt="[Стеллаж СТАЛВОРД]" 
-                             class="w-full h-full object-cover transition duration-700 group-hover:scale-105 group-hover:opacity-80">
+                             class="w-full h-full object-cover scale-[1.1] transition duration-700 group-hover:scale-[1.15] group-hover:opacity-80">
                     </div>
                     <div class="p-8">
                         <div class="flex justify-between items-start mb-4">
@@ -246,9 +246,9 @@
                 <!-- Товар 3 -->
                 <div class="group relative bg-zinc-950 border border-zinc-800 p-2 overflow-hidden transition-all hover:border-orange-500/50">
                     <div class="relative h-[400px] overflow-hidden bg-zinc-900 cursor-pointer" onclick="openSlider('BRUTAL')">
-                        <img src="img/ТИТАН-Д.png"
+                        <img src="img/ТИТАН-Д/ТИТАН-Д.png"
                              alt="[Верстак ТИТАН-Д]" 
-                             class="w-full h-full object-cover transition duration-700 group-hover:scale-105 group-hover:opacity-80">
+                             class="w-full h-full object-cover object-[50%_65%] transition duration-700 group-hover:scale-105 group-hover:opacity-80">
                     </div>
                     <div class="p-8">
                         <div class="flex justify-between items-start mb-4">
@@ -271,7 +271,7 @@
                 <!-- Товар 4 -->
                 <div class="group relative bg-zinc-950 border border-zinc-800 p-2 overflow-hidden transition-all hover:border-orange-500/50">
                     <div class="relative h-[400px] overflow-hidden bg-zinc-900 cursor-pointer" onclick="openSlider('STEEL')">
-                        <img src="img/Шкаф.png"
+                        <img src="img/СТАЛВОРД-КРАФТ/СТАЛВОРД-КРАФТ.png"
                              alt="[Стеллаж СТАЛВОРД-КРАФТ]" 
                              class="w-full h-full object-cover transition duration-700 group-hover:scale-105 group-hover:opacity-80">
                     </div>
@@ -295,14 +295,14 @@
 
             </div>
             <!-- КНОПКА СКАЧИВАНИЯ PDF -->
-            <div class="flex justify-center">
+            <!-- <div class="flex justify-center">
                 <a href="#" download="HARDFORMA_Catalog_2026.pdf" class="flex items-center space-x-4 border-2 border-orange-500 text-orange-500 px-10 py-4 font-black uppercase text-xs tracking-[0.2em] hover:bg-orange-500 hover:text-white transition-all duration-300 group mt-12">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
                     <span>Скачать полный каталог (PDF)</span>
                 </a>
-            </div>
+            </div> -->
         </div>
         
     </section>
@@ -430,9 +430,9 @@
 
         // Данные для слайдера
         const productImages = {
-            'CRAFT': ['img/Верстак1.png', 'img/Верстак2.png', 'img/Верстак3.png'],
+            'CRAFT': ['img/ТИТАН-М/1.png', 'img/ТИТАН-М/2.png', 'img/ТИТАН-М/3.png'],
             'TITAN': ['img/Стеллаж1.png', 'img/Стеллаж2.png', 'img/Стеллаж3.png'],
-            'BRUTAL': ['img/Стеллаж1.png', 'img/Стеллаж2.png', 'img/Стеллаж3.png'],
+            'BRUTAL': ['img/ТИТАН-Д/1.png', 'img/ТИТАН-Д/2.png', 'img/ТИТАН-Д/3.png'],
             'STEEL': ['img/Стеллаж1.png', 'img/Стеллаж2.png', 'img/Стеллаж3.png']
         };
 
