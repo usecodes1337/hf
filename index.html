@@ -34,6 +34,43 @@
         .animate-pulse-subtle {
             animation: pulse-subtle 3s ease-in-out infinite;
         }
+
+        /* --- ОБНОВЛЕННЫЕ СТИЛИ ДЛЯ АНИМАЦИЙ (РЕВЕАЛЫ) --- */
+        /* Добавлен легкий scale для эффекта "вырастания" и изменена кривая плавности */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(40px) scale(0.96); 
+            transition: all 0.9s cubic-bezier(0.25, 1, 0.5, 1);
+            will-change: opacity, transform;
+        }
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: all 0.9s cubic-bezier(0.25, 1, 0.5, 1);
+            will-change: opacity, transform;
+        }
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: all 0.9s cubic-bezier(0.25, 1, 0.5, 1);
+            will-change: opacity, transform;
+        }
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.92);
+            transition: all 0.9s cubic-bezier(0.25, 1, 0.5, 1);
+            will-change: opacity, transform;
+        }
+        /* Класс, который добавляется через JS при попадании в зону видимости */
+        .reveal-active {
+            opacity: 1;
+            transform: translate(0) scale(1);
+        }
+        /* Задержки для поочередного появления (сделаны более динамичными) */
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+        .delay-400 { transition-delay: 400ms; }
     </style>
 </head>
 <body class="bg-zinc-950 text-zinc-100 selection:bg-orange-500 selection:text-white">
@@ -47,7 +84,7 @@
     </div>
 
     <!-- Навигация -->
-    <header class="fixed w-full z-50 bg-zinc-950/80 backdrop-blur-md border-b border-zinc-800">
+    <header class="hidden md:block fixed w-full z-50 bg-zinc-950/80 backdrop-blur-md border-b border-zinc-800">
         <nav class="flex justify-between items-center p-4 md:p-6 max-w-7xl mx-auto">
             <a href="#" class="block transition-opacity hover:opacity-80">
                 <img src="img/hflogo.png" alt="HARDFORMA" class="h-6 md:h-6 w-auto object-contain">
@@ -81,13 +118,14 @@
     <!-- Герой-секция -->
     <section class="relative h-screen flex items-center justify-center overflow-hidden">
         <div class="absolute inset-0 z-0">
-            <img src="img/main_background.png"
+            <!-- Добавлен класс id="hero-bg" для параллакса -->
+            <img id="hero-bg" src="img/main_background.png"
                  alt="[Изображение мастерской]" 
-                 class="w-full h-full object-cover opacity-40">
+                 class="w-full h-full object-cover opacity-40 scale-105">
             <div class="absolute inset-0 hero-gradient"></div>
         </div>
 
-        <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
+        <div id="hero-content" class="relative z-10 max-w-5xl mx-auto px-6 text-center reveal-up">
             <span class="inline-block mb-10 text-orange-500 font-bold tracking-[0.3em] uppercase text-xs animate-pulse">Handmade Industrial Furniture</span>
             <div class="mb-12 flex justify-center">
                 <img src="img/hflogo.png" alt="HARDFORMA" class="w-full max-w-2xl md:max-w-4xl h-auto object-contain filter brightness-110">
@@ -119,7 +157,7 @@
         </div>
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="grid lg:grid-cols-2 gap-20 items-center">
-                <div>
+                <div class="reveal-left">
                     <h2 class="text-3xl md:text-5xl font-black uppercase mb-8 leading-tight">
                         Почему выбирают <br>
                         <img src="img/hflogo.png" alt="HARD FORMA" class="inline-block h-10 md:h-12 mt-3 object-contain">
@@ -145,18 +183,10 @@
                     </div>
                 </div>
                 <!-- Правая колонка с фоновым видео (анимацией) -->
-                <div class="relative w-full h-[400px] lg:h-[500px] bg-zinc-900 border border-zinc-800 custom-shadow overflow-hidden group">
+                <div class="relative w-full h-[400px] lg:h-[500px] bg-zinc-900 border border-zinc-800 custom-shadow overflow-hidden group reveal-right">
                     <!-- Темная подложка (пока видео грузится) -->
                     <div class="absolute inset-0 bg-zinc-950 z-0"></div>
                     
-                    <!-- 
-                        Атрибуты видео:
-                        autoplay - автозапуск
-                        loop - зацикливание
-                        muted - без звука (обязательно для автозапуска)
-                        playsinline - автозапуск на iOS
-                        pointer-events-none - запрет на клики/паузу
-                    -->
                     <video 
                         autoplay 
                         loop 
@@ -185,7 +215,7 @@
     <!-- Продукция -->
     <section id="products" class="py-32 bg-zinc-900/50">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-20">
+            <div class="text-center mb-20 reveal-up">
                 <h2 class="text-4xl md:text-6xl font-black uppercase mb-4 tracking-tighter">Наш каталог</h2>
                 <div class="h-1 w-20 bg-orange-500 mx-auto"></div>
             </div>
@@ -194,9 +224,9 @@
             <div class="grid md:grid-cols-2 gap-12">
                 
                 <!-- Товар 1 -->
-                <div class="group relative bg-zinc-950 border border-zinc-800 p-2 overflow-hidden transition-all md:hover:border-orange-500/50">
+                <div class="group relative bg-zinc-950 border border-zinc-800 p-2 overflow-hidden transition-all md:hover:border-orange-500/50 reveal-up">
                     <div class="relative h-[400px] overflow-hidden bg-zinc-900 cursor-pointer" onclick="openSlider('CRAFT')">
-                        <img src="img/ТИТАН-М/ТИТАН-М.png"
+                        <img src="img/ТИТАН-М/ТИТАН-М.jpg"
                              alt="[Верстак ТИТАН-М]" 
                              class="w-full h-full object-cover scale-[1.2] transition duration-700 md:group-hover:scale-125 md:group-hover:opacity-80">
                     </div>
@@ -219,7 +249,7 @@
                 </div>
 
                 <!-- Товар 2 -->
-                <div class="group relative bg-zinc-950 border border-zinc-800 p-2 overflow-hidden transition-all md:hover:border-orange-500/50">
+                <div class="group relative bg-zinc-950 border border-zinc-800 p-2 overflow-hidden transition-all md:hover:border-orange-500/50 reveal-up delay-100">
                     <div class="relative h-[400px] overflow-hidden bg-zinc-900 cursor-pointer" onclick="openSlider('TITAN')">
                         <img src="img/СТАЛВОРД/СТАЛВОРД.png"
                              alt="[Стеллаж СТАЛВОРД]" 
@@ -244,7 +274,7 @@
                 </div>
 
                 <!-- Товар 3 -->
-                <div class="group relative bg-zinc-950 border border-zinc-800 p-2 overflow-hidden transition-all md:hover:border-orange-500/50">
+                <div class="group relative bg-zinc-950 border border-zinc-800 p-2 overflow-hidden transition-all md:hover:border-orange-500/50 reveal-up delay-200">
                     <div class="relative h-[400px] overflow-hidden bg-zinc-900 cursor-pointer" onclick="openSlider('BRUTAL')">
                         <img src="img/ТИТАН-Д/ТИТАН-Д.png"
                              alt="[Верстак ТИТАН-Д]" 
@@ -269,7 +299,7 @@
                 </div>
 
                 <!-- Товар 4 -->
-                <div class="group relative bg-zinc-950 border border-zinc-800 p-2 overflow-hidden transition-all md:hover:border-orange-500/50">
+                <div class="group relative bg-zinc-950 border border-zinc-800 p-2 overflow-hidden transition-all md:hover:border-orange-500/50 reveal-up delay-300">
                     <div class="relative h-[400px] overflow-hidden bg-zinc-900 cursor-pointer" onclick="openSlider('STEEL')">
                         <img src="img/СТАЛВОРД-КРАФТ/СТАЛВОРД-КРАФТ.png"
                              alt="[Стеллаж СТАЛВОРД-КРАФТ]" 
@@ -295,7 +325,7 @@
 
             </div>
             <!-- КНОПКА СКАЧИВАНИЯ PDF -->
-            <!-- <div class="flex justify-center">
+            <!-- <div class="flex justify-center reveal-up delay-400">
                 <a href="#" download="HARDFORMA_Catalog_2026.pdf" class="flex items-center space-x-4 border-2 border-orange-500 text-orange-500 px-10 py-4 font-black uppercase text-xs tracking-[0.2em] hover:bg-orange-500 hover:text-white transition-all duration-300 group mt-12">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -345,7 +375,7 @@
     <!-- Форма связи -->
     <section id="contact" class="py-32 relative bg-zinc-950">
         <div class="max-w-4xl mx-auto px-6">
-            <div class="bg-orange-600 p-8 md:p-16 custom-shadow relative overflow-hidden">
+            <div class="bg-orange-600 p-8 md:p-16 custom-shadow relative overflow-hidden reveal-scale">
 
                 <div class="relative z-10 text-center mb-12">
                     <h2 class="text-3xl md:text-5xl font-black uppercase mb-4"></h2>
@@ -354,7 +384,6 @@
 
                 <form id="contact-form" class="space-y-4 max-w-lg mx-auto">
                     <div class="grid md:grid-cols-2 gap-4">
-                        <!-- Добавлен id="name-input" -->
                         <input type="text" id="name-input" required placeholder="Имя" class="w-full p-4 bg-white/10 border border-white/20 text-white placeholder:text-white/60 outline-none focus:bg-white/20 transition font-bold">
                         <input type="tel" id="phone-input" required 
                                pattern="\+7[0-9]{10}" 
@@ -362,7 +391,6 @@
                                placeholder="+7 (___) ___ __ __" 
                                class="w-full p-4 bg-white/10 border border-white/20 text-white placeholder:text-white/60 outline-none focus:bg-white/20 transition font-bold">
                     </div>
-                    <!-- Добавлен id="message-input" -->
                     <textarea id="message-input" placeholder="Ваш вопрос (можно оставить пустым)" class="w-full p-4 bg-white/10 border border-white/20 text-white placeholder:text-white/60 h-32 outline-none focus:bg-white/20 transition font-bold"></textarea>
                     
                     <button type="submit" id="submit-btn" class="w-full bg-zinc-950 text-white font-black uppercase py-5 tracking-widest hover:bg-black transition-colors transform active:scale-[0.98]">
@@ -422,11 +450,54 @@
                 loader.style.opacity = '0';
                 document.body.classList.remove('loading-active');
                 
+                // Активируем анимацию главного экрана после прелоадера
+                setTimeout(() => {
+                    document.getElementById('hero-content').classList.add('reveal-active');
+                }, 100);
+
                 setTimeout(() => {
                     loader.style.display = 'none';
                 }, 1000);
             }, 2500);
         });
+
+        // ==========================================
+        // АНИМАЦИИ ПРИ СКРОЛЛЕ (Intersection Observer)
+        // ОБНОВЛЕНО ДЛЯ БОЛЕЕ ПЛАВНОГО ПОЯВЛЕНИЯ
+        // ==========================================
+        const observerOptions = {
+            root: null,
+            // Сдвигаем границу срабатывания чуть вверх: анимация начнется, когда
+            // элемент появится на экране хотя бы на 10% (решает проблему с задержками на смартфонах)
+            rootMargin: '0px 0px -10% 0px', 
+            threshold: 0 
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal-active');
+                    observer.unobserve(entry.target); // Анимируем только один раз
+                }
+            });
+        }, observerOptions);
+
+        // Находим все элементы для анимации (кроме hero-content, который анимируется при загрузке)
+        document.querySelectorAll('.reveal-up:not(#hero-content), .reveal-left, .reveal-right, .reveal-scale').forEach(el => {
+            observer.observe(el);
+        });
+
+        // ==========================================
+        // ЭФФЕКТ ПАРАЛЛАКСА ДЛЯ ГЛАВНОГО ФОНА
+        // ==========================================
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY;
+            const heroBg = document.getElementById('hero-bg');
+            if (heroBg) {
+                // Смещаем фон вниз с половинной скоростью скролла
+                heroBg.style.transform = `translateY(${scrolled * 0.4}px) scale(1.05)`;
+            }
+        }); 
 
         // Данные для слайдера
         const productImages = {
@@ -529,7 +600,7 @@
             }
         });
 
-// ==========================================
+        // ==========================================
         // ОТПРАВКА ДАННЫХ В TELEGRAM
         // ==========================================
         const form = document.getElementById('contact-form');
@@ -549,9 +620,6 @@
             submitBtn.disabled = true;
             submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
 
-            // Имитация отправки, если токен не был изменен пользователем. 
-            // Это решает ошибку "Failed to fetch", которая возникает из-за
-            // несуществующего токена и отсутствия CORS-заголовков в ответе 404.
             if (TELEGRAM_BOT_TOKEN === 'ВАШ_ТОКЕН_БОТА' || !TELEGRAM_BOT_TOKEN) {
                 setTimeout(() => {
                     successMsg.classList.remove('hidden');
@@ -574,7 +642,6 @@
             const apiUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
 
             try {
-                // Создаем массив запросов для каждого получателя
                 const sendPromises = TELEGRAM_CHAT_IDS.map(chatId => {
                     return fetch(apiUrl, {
                         method: 'POST',
@@ -582,25 +649,20 @@
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
-                            chat_id: chatId.trim(), // .trim() удаляет случайные пробелы по краям
+                            chat_id: chatId.trim(),
                             text: telegramMessage,
                             parse_mode: 'Markdown'
                         })
                     });
                 });
 
-                // Выполняем все запросы одновременно и ждем их завершения
                 const responses = await Promise.all(sendPromises);
-
-                // Проверяем, что все сообщения были успешно отправлены
                 const allSuccessful = responses.every(res => res.ok);
 
                 if (allSuccessful) {
-                    // Если успешно, показываем окно благодарности
                     successMsg.classList.remove('hidden');
                     successMsg.classList.add('flex');
                 } else {
-                    // Находим первый запрос с ошибкой, чтобы показать причину
                     const failedResponse = responses.find(res => !res.ok);
                     const errorData = await failedResponse.json();
                     alert(`Ошибка Telegram: ${errorData.description || 'Проверьте токен и Chat ID'}`);
@@ -609,7 +671,6 @@
                 console.error('Ошибка:', error);
                 alert('Произошла сетевая ошибка при отправке заявки. Убедитесь, что токен бота введен верно.');
             } finally {
-                // Возвращаем кнопку в исходное состояние
                 submitBtn.innerText = 'Отправить заявку';
                 submitBtn.disabled = false;
                 submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
@@ -627,10 +688,8 @@
             const messageInput = document.getElementById('message-input');
             messageInput.value = `Здравствуйте! Меня интересует ${productName}.`;
             
-            // Плавный скролл к блоку контактов
             document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
             
-            // Ставим фокус в поле ввода через небольшую паузу (чтобы скролл успел начаться)
             setTimeout(() => {
                 messageInput.focus();
             }, 800);
