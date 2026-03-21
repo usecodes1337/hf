@@ -40,25 +40,25 @@
         .reveal-up {
             opacity: 0;
             transform: translateY(40px) scale(0.96); 
-            transition: all 0.9s cubic-bezier(0.25, 1, 0.5, 1);
+            transition: all 1.5s cubic-bezier(0.25, 1, 0.5, 1);
             will-change: opacity, transform;
         }
         .reveal-left {
             opacity: 0;
             transform: translateX(-40px);
-            transition: all 0.9s cubic-bezier(0.25, 1, 0.5, 1);
+            transition: all 1.5s cubic-bezier(0.25, 1, 0.5, 1);
             will-change: opacity, transform;
         }
         .reveal-right {
             opacity: 0;
             transform: translateX(40px);
-            transition: all 0.9s cubic-bezier(0.25, 1, 0.5, 1);
+            transition: all 1.5s cubic-bezier(0.25, 1, 0.5, 1);
             will-change: opacity, transform;
         }
         .reveal-scale {
             opacity: 0;
             transform: scale(0.92);
-            transition: all 0.9s cubic-bezier(0.25, 1, 0.5, 1);
+            transition: all 1.5s cubic-bezier(0.25, 1, 0.5, 1);
             will-change: opacity, transform;
         }
         /* Класс, который добавляется через JS при попадании в зону видимости */
@@ -67,10 +67,10 @@
             transform: translate(0) scale(1);
         }
         /* Задержки для поочередного появления (сделаны более динамичными) */
-        .delay-100 { transition-delay: 100ms; }
-        .delay-200 { transition-delay: 200ms; }
-        .delay-300 { transition-delay: 300ms; }
-        .delay-400 { transition-delay: 400ms; }
+        .delay-100 { transition-delay: 200ms; }
+        .delay-200 { transition-delay: 400ms; }
+        .delay-300 { transition-delay: 600ms; }
+        .delay-400 { transition-delay: 800ms; }
     </style>
 </head>
 <body class="bg-zinc-950 text-zinc-100 selection:bg-orange-500 selection:text-white">
@@ -119,7 +119,7 @@
     <section class="relative h-screen flex items-center justify-center overflow-hidden">
         <div class="absolute inset-0 z-0">
             <!-- Добавлен класс id="hero-bg" для параллакса -->
-            <img id="hero-bg" src="img/main_background.png"
+            <img id="hero-bg" src="img/main_background.jpg"
                  alt="[Изображение мастерской]" 
                  class="w-full h-full object-cover opacity-40 scale-105">
             <div class="absolute inset-0 hero-gradient"></div>
@@ -160,7 +160,7 @@
                 <div class="reveal-left">
                     <h2 class="text-3xl md:text-5xl font-black uppercase mb-8 leading-tight">
                         Почему выбирают <br>
-                        <img src="img/hflogo.png" alt="HARD FORMA" class="inline-block h-10 md:h-12 mt-3 object-contain">
+                        <img src="img/hflogo.jpg" alt="HARD FORMA" class="inline-block h-10 md:h-12 mt-3 object-contain">
                     </h2>
                     <p class="text-zinc-400 text-lg mb-12 leading-relaxed italic border-l-4 border-orange-500 pl-6">
                         "Мы не просто используем металл — мы создаем надежный фундамент для вашего дела. Будь то гараж мечты или современный офис."
@@ -224,102 +224,110 @@
             <div class="grid md:grid-cols-2 gap-12">
                 
                 <!-- Товар 1 -->
-                <div class="group relative bg-zinc-950 border border-zinc-800 p-2 overflow-hidden transition-all md:hover:border-orange-500/50 reveal-up">
-                    <div class="relative h-[400px] overflow-hidden bg-zinc-900 cursor-pointer" onclick="openSlider('CRAFT')">
-                        <img src="img/ТИТАН-М/ТИТАН-М.jpg"
-                             alt="[Верстак ТИТАН-М]" 
-                             class="w-full h-full object-cover scale-[1.2] transition duration-700 md:group-hover:scale-125 md:group-hover:opacity-80">
-                    </div>
-                    <div class="p-8">
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <h3 class="text-2xl font-black uppercase mb-1">ТИТАН-М</h3>
-                                <p class="text-orange-500 text-xs font-bold tracking-widest uppercase">Модульный верстак</p>
-                            </div>
-                            <span class="text-xl font-bold italic">от 45 000 ₽</span>
+                <div class="reveal-up">
+                    <div class="group relative bg-zinc-950 border border-zinc-800 p-2 h-full overflow-hidden transition-colors duration-300 md:hover:border-orange-500/50">
+                        <div class="relative h-[400px] overflow-hidden bg-zinc-900 cursor-pointer" onclick="openSlider('CRAFT')">
+                            <img src="img/ТИТАН-М/ТИТАН-М.jpg"
+                                 alt="[Верстак ТИТАН-М]" 
+                                 class="w-full h-full object-cover scale-[1.2] transition duration-700 md:group-hover:scale-125 md:group-hover:opacity-80">
                         </div>
-                        <ul class="text-zinc-500 text-sm space-y-2 mb-8 font-medium">
-                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-orange-500 mr-2"></span> Сталь 2-3 мм</li>
-                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-orange-500 mr-2"></span> Столешница: Мебельный щит 4 мм</li>
-                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-orange-500 mr-2"></span> Нагрузка до 500 кг</li>
-                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-orange-500 mr-2"></span> Размеры: 1800х600х835</li>
-                        </ul>
-                        <button onclick="scrollToOrder('ТИТАН-М (Модульный верстак)')" class="w-full py-4 border-2 border-orange-600 text-orange-500 font-black uppercase text-xs tracking-widest hover:bg-orange-600 hover:text-white transition">Оформить заказ</button>
+                        <div class="p-8">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <h3 class="text-2xl font-black uppercase mb-1">ТИТАН-М</h3>
+                                    <p class="text-orange-500 text-xs font-bold tracking-widest uppercase">Модульный верстак</p>
+                                </div>
+                                <span class="text-xl font-bold italic">от 45 000 ₽</span>
+                            </div>
+                            <ul class="text-zinc-500 text-sm space-y-2 mb-8 font-medium">
+                                <li class="flex items-center"><span class="w-1.5 h-1.5 bg-orange-500 mr-2"></span> Сталь 2-3 мм</li>
+                                <li class="flex items-center"><span class="w-1.5 h-1.5 bg-orange-500 mr-2"></span> Столешница: Мебельный щит 4 мм</li>
+                                <li class="flex items-center"><span class="w-1.5 h-1.5 bg-orange-500 mr-2"></span> Нагрузка до 500 кг</li>
+                                <li class="flex items-center"><span class="w-1.5 h-1.5 bg-orange-500 mr-2"></span> Размеры: 1800х600х835</li>
+                            </ul>
+                            <button onclick="scrollToOrder('ТИТАН-М (Модульный верстак)')" class="w-full py-4 border-2 border-orange-600 text-orange-500 font-black uppercase text-xs tracking-widest hover:bg-orange-600 hover:text-white transition">Оформить заказ</button>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Товар 2 -->
-                <div class="group relative bg-zinc-950 border border-zinc-800 p-2 overflow-hidden transition-all md:hover:border-orange-500/50 reveal-up delay-100">
-                    <div class="relative h-[400px] overflow-hidden bg-zinc-900 cursor-pointer" onclick="openSlider('TITAN')">
-                        <img src="img/СТАЛВОРД/СТАЛВОРД.png"
-                             alt="[Стеллаж СТАЛВОРД]" 
-                             class="w-full h-full object-cover scale-[1.1] transition duration-700 md:group-hover:scale-[1.15] md:group-hover:opacity-80">
-                    </div>
-                    <div class="p-8">
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <h3 class="text-2xl font-black uppercase mb-1">СТАЛВОРД</h3>
-                                <p class="text-orange-500 text-xs font-bold tracking-widest uppercase">Стеллаж</p>
-                            </div>
-                            <span class="text-xl font-bold italic">от 28 000 ₽</span>
+                <div class="reveal-up delay-100">
+                    <div class="group relative bg-zinc-950 border border-zinc-800 p-2 h-full overflow-hidden transition-colors duration-300 md:hover:border-orange-500/50">
+                        <div class="relative h-[400px] overflow-hidden bg-zinc-900 cursor-pointer" onclick="openSlider('TITAN')">
+                            <img src="img/СТАЛВОРД/СТАЛВОРД.jpg"
+                                 alt="[Стеллаж СТАЛВОРД]" 
+                                 class="w-full h-full object-cover scale-[1.1] transition duration-700 md:group-hover:scale-[1.15] md:group-hover:opacity-80">
                         </div>
-                        <ul class="text-zinc-500 text-sm space-y-2 mb-8 font-medium">
-                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-orange-500 mr-2"></span> Сталь 2-3 мм</li>
-                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-orange-500 mr-2"></span> Полки: Мебельный щит 3 мм</li>
-                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-orange-500 mr-2"></span> Нагрузка на полку 45 кг</li>
-                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-orange-500 mr-2"></span> Размеры: 1000х400х2000</li>
-                        </ul>
-                        <button onclick="scrollToOrder('СТАЛВОРД (Стеллаж)')" class="w-full py-4 border-2 border-orange-600 text-orange-500 font-black uppercase text-xs tracking-widest hover:bg-orange-600 hover:text-white transition">Оформить заказ</button>
+                        <div class="p-8">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <h3 class="text-2xl font-black uppercase mb-1">СТАЛВОРД</h3>
+                                    <p class="text-orange-500 text-xs font-bold tracking-widest uppercase">Стеллаж</p>
+                                </div>
+                                <span class="text-xl font-bold italic">от 28 000 ₽</span>
+                            </div>
+                            <ul class="text-zinc-500 text-sm space-y-2 mb-8 font-medium">
+                                <li class="flex items-center"><span class="w-1.5 h-1.5 bg-orange-500 mr-2"></span> Сталь 2-3 мм</li>
+                                <li class="flex items-center"><span class="w-1.5 h-1.5 bg-orange-500 mr-2"></span> Полки: Мебельный щит 3 мм</li>
+                                <li class="flex items-center"><span class="w-1.5 h-1.5 bg-orange-500 mr-2"></span> Нагрузка на полку 45 кг</li>
+                                <li class="flex items-center"><span class="w-1.5 h-1.5 bg-orange-500 mr-2"></span> Размеры: 1000х400х2000</li>
+                            </ul>
+                            <button onclick="scrollToOrder('СТАЛВОРД (Стеллаж)')" class="w-full py-4 border-2 border-orange-600 text-orange-500 font-black uppercase text-xs tracking-widest hover:bg-orange-600 hover:text-white transition">Оформить заказ</button>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Товар 3 -->
-                <div class="group relative bg-zinc-950 border border-zinc-800 p-2 overflow-hidden transition-all md:hover:border-orange-500/50 reveal-up delay-200">
-                    <div class="relative h-[400px] overflow-hidden bg-zinc-900 cursor-pointer" onclick="openSlider('BRUTAL')">
-                        <img src="img/ТИТАН-Д/ТИТАН-Д.png"
-                             alt="[Верстак ТИТАН-Д]" 
-                             class="w-full h-full object-cover object-[50%_65%] transition duration-700 md:group-hover:scale-105 md:group-hover:opacity-80">
-                    </div>
-                    <div class="p-8">
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <h3 class="text-2xl font-black uppercase mb-1">ТИТАН-Д</h3>
-                                <p class="text-orange-500 text-xs font-bold tracking-widest uppercase">Модульный верстак</p>
-                            </div>
-                            <span class="text-xl font-bold italic">от 35 000 ₽</span>
+                <div class="reveal-up delay-200">
+                    <div class="group relative bg-zinc-950 border border-zinc-800 p-2 h-full overflow-hidden transition-colors duration-300 md:hover:border-orange-500/50">
+                        <div class="relative h-[400px] overflow-hidden bg-zinc-900 cursor-pointer" onclick="openSlider('BRUTAL')">
+                            <img src="img/ТИТАН-Д/ТИТАН-Д.jpg"
+                                 alt="[Верстак ТИТАН-Д]" 
+                                 class="w-full h-full object-cover object-[50%_65%] transition duration-700 md:group-hover:scale-105 md:group-hover:opacity-80">
                         </div>
-                        <ul class="text-zinc-500 text-sm space-y-2 mb-8 font-medium">
-                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-orange-500 mr-2"></span> Сталь 2-3 мм</li>
-                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-orange-500 mr-2"></span> Столешница: Мебельный щит 4 мм</li>
-                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-orange-500 mr-2"></span> Нагрузка до 500 кг</li>
-                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-orange-500 mr-2"></span> Размеры: 1800х600х835</li>
-                        </ul>
-                        <button onclick="scrollToOrder('ТИТАН-Д (Модульный верстак)')" class="w-full py-4 border-2 border-orange-600 text-orange-500 font-black uppercase text-xs tracking-widest hover:bg-orange-600 hover:text-white transition">Оформить заказ</button>
+                        <div class="p-8">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <h3 class="text-2xl font-black uppercase mb-1">ТИТАН-Д</h3>
+                                    <p class="text-orange-500 text-xs font-bold tracking-widest uppercase">Модульный верстак</p>
+                                </div>
+                                <span class="text-xl font-bold italic">от 35 000 ₽</span>
+                            </div>
+                            <ul class="text-zinc-500 text-sm space-y-2 mb-8 font-medium">
+                                <li class="flex items-center"><span class="w-1.5 h-1.5 bg-orange-500 mr-2"></span> Сталь 2-3 мм</li>
+                                <li class="flex items-center"><span class="w-1.5 h-1.5 bg-orange-500 mr-2"></span> Столешница: Мебельный щит 4 мм</li>
+                                <li class="flex items-center"><span class="w-1.5 h-1.5 bg-orange-500 mr-2"></span> Нагрузка до 500 кг</li>
+                                <li class="flex items-center"><span class="w-1.5 h-1.5 bg-orange-500 mr-2"></span> Размеры: 1800х600х835</li>
+                            </ul>
+                            <button onclick="scrollToOrder('ТИТАН-Д (Модульный верстак)')" class="w-full py-4 border-2 border-orange-600 text-orange-500 font-black uppercase text-xs tracking-widest hover:bg-orange-600 hover:text-white transition">Оформить заказ</button>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Товар 4 -->
-                <div class="group relative bg-zinc-950 border border-zinc-800 p-2 overflow-hidden transition-all md:hover:border-orange-500/50 reveal-up delay-300">
-                    <div class="relative h-[400px] overflow-hidden bg-zinc-900 cursor-pointer" onclick="openSlider('STEEL')">
-                        <img src="img/СТАЛВОРД-КРАФТ/СТАЛВОРД-КРАФТ.png"
-                             alt="[Стеллаж СТАЛВОРД-КРАФТ]" 
-                             class="w-full h-full object-cover transition duration-700 md:group-hover:scale-105 md:group-hover:opacity-80">
-                    </div>
-                    <div class="p-8">
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <h3 class="text-2xl font-black uppercase mb-1">СТАЛВОРД-КРАФТ</h3>
-                                <p class="text-orange-500 text-xs font-bold tracking-widest uppercase">Cтеллаж с рабочим пространством</p>
-                            </div>
-                            <span class="text-xl font-bold italic">от 52 000 ₽</span>
+                <div class="reveal-up delay-300">
+                    <div class="group relative bg-zinc-950 border border-zinc-800 p-2 h-full overflow-hidden transition-colors duration-300 md:hover:border-orange-500/50">
+                        <div class="relative h-[400px] overflow-hidden bg-zinc-900 cursor-pointer" onclick="openSlider('STEEL')">
+                            <img src="img/СТАЛВОРД-КРАФТ/СТАЛВОРД-КРАФТ.jpg"
+                                 alt="[Стеллаж СТАЛВОРД-КРАФТ]" 
+                                 class="w-full h-full object-cover transition duration-700 md:group-hover:scale-105 md:group-hover:opacity-80">
                         </div>
-                        <ul class="text-zinc-500 text-sm space-y-2 mb-8 font-medium">
-                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-orange-500 mr-2"></span> Сталь 2-3 мм</li>
-                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-orange-500 mr-2"></span> Полки: Мебельный щит 3 мм</li>
-                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-orange-500 mr-2"></span> Столешница: 32 мм дерево сталь</li>
-                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-orange-500 mr-2"></span> Размеры: 1000х400х2000</li>
-                        </ul>
-                        <button onclick="scrollToOrder('СТАЛВОРД-КРАФТ (Cтеллаж с рабочим пространством)')" class="w-full py-4 border-2 border-orange-600 text-orange-500 font-black uppercase text-xs tracking-widest hover:bg-orange-600 hover:text-white transition">Оформить заказ</button>
+                        <div class="p-8">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <h3 class="text-2xl font-black uppercase mb-1">СТАЛВОРД-КРАФТ</h3>
+                                    <p class="text-orange-500 text-xs font-bold tracking-widest uppercase">Cтеллаж с рабочим пространством</p>
+                                </div>
+                                <span class="text-xl font-bold italic">от 52 000 ₽</span>
+                            </div>
+                            <ul class="text-zinc-500 text-sm space-y-2 mb-8 font-medium">
+                                <li class="flex items-center"><span class="w-1.5 h-1.5 bg-orange-500 mr-2"></span> Сталь 2-3 мм</li>
+                                <li class="flex items-center"><span class="w-1.5 h-1.5 bg-orange-500 mr-2"></span> Полки: Мебельный щит 3 мм</li>
+                                <li class="flex items-center"><span class="w-1.5 h-1.5 bg-orange-500 mr-2"></span> Столешница: 32 мм дерево сталь</li>
+                                <li class="flex items-center"><span class="w-1.5 h-1.5 bg-orange-500 mr-2"></span> Размеры: 1000х400х2000</li>
+                            </ul>
+                            <button onclick="scrollToOrder('СТАЛВОРД-КРАФТ (Cтеллаж с рабочим пространством)')" class="w-full py-4 border-2 border-orange-600 text-orange-500 font-black uppercase text-xs tracking-widest hover:bg-orange-600 hover:text-white transition">Оформить заказ</button>
+                        </div>
                     </div>
                 </div>
 
@@ -433,7 +441,7 @@
         // НАСТРОЙКИ TELEGRAM БОТА (ВСТАВЬТЕ СВОИ ДАННЫЕ)
         // ==========================================
         const TELEGRAM_BOT_TOKEN = '8211955069:AAHEK_6xFE6my_08jNQE2PCaVx5RCdOUXrc';
-        const TELEGRAM_CHAT_IDS = ['931696118', '1004619614'];
+        const TELEGRAM_CHAT_IDS = ['931696118', '1004619614', '915250760'];
         // ==========================================
 
         // ЛОГИКА ЭКРАНА ЗАГРУЗКИ
@@ -453,7 +461,7 @@
                 // Активируем анимацию главного экрана после прелоадера
                 setTimeout(() => {
                     document.getElementById('hero-content').classList.add('reveal-active');
-                }, 100);
+                }, 200);
 
                 setTimeout(() => {
                     loader.style.display = 'none';
@@ -501,10 +509,10 @@
 
         // Данные для слайдера
         const productImages = {
-            'CRAFT': ['img/ТИТАН-М/1.png', 'img/ТИТАН-М/2.png', 'img/ТИТАН-М/3.png'],
-            'TITAN': ['img/СТАЛВОРД/1.png', 'img/СТАЛВОРД/2.png'],
-            'BRUTAL': ['img/ТИТАН-Д/1.png', 'img/ТИТАН-Д/2.png', 'img/ТИТАН-Д/3.png'],
-            'STEEL': ['img/СТАЛВОРД-КРАФТ/1.png', 'img/СТАЛВОРД-КРАФТ/2.jpg', 'img/СТАЛВОРД-КРАФТ/3.jpg']
+            'CRAFT': ['img/ТИТАН-М/1.jpg', 'img/ТИТАН-М/2.jpg', 'img/ТИТАН-М/3.jpg'],
+            'TITAN': ['img/СТАЛВОРД/1.jpg', 'img/СТАЛВОРД/2.jpg'],
+            'BRUTAL': ['img/ТИТАН-Д/1.jpg', 'img/ТИТАН-Д/2.jpg', 'img/ТИТАН-Д/3.jpg'],
+            'STEEL': ['img/СТАЛВОРД-КРАФТ/1.jpg', 'img/СТАЛВОРД-КРАФТ/2.jpg', 'img/СТАЛВОРД-КРАФТ/3.jpg']
         };
 
         let currentProduct = null;
