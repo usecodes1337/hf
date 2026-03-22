@@ -35,6 +35,16 @@
             animation: pulse-subtle 3s ease-in-out infinite;
         }
 
+        /* --- Анимация бесконечной карусели слева направо --- */
+        @keyframes scroll-right {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0); }
+        }
+        .animate-scroll-right {
+            animation: scroll-right 40s linear infinite;
+            width: max-content;
+        }
+
         /* --- ОБНОВЛЕННЫЕ СТИЛИ ДЛЯ АНИМАЦИЙ (РЕВЕАЛЫ) --- */
         /* Добавлен легкий scale для эффекта "вырастания" и изменена кривая плавности */
         .reveal-up {
@@ -94,6 +104,7 @@
             <div class="hidden md:flex space-x-10 text-[10px] font-bold uppercase tracking-[0.2em]">
                 <a href="#about" class="hover:text-orange-500 transition-colors">О нас</a>
                 <a href="#products" class="hover:text-orange-500 transition-colors">Продукция</a>
+                <a href="#reviews" class="hover:text-orange-500 transition-colors">Отзывы</a>
                 <a href="#contact" class="hover:text-orange-500 transition-colors">Заказать</a>
             </div>
 
@@ -111,6 +122,7 @@
         <div id="mobile-menu" class="hidden md:hidden bg-zinc-900 border-b border-zinc-800 p-6 space-y-4 text-center">
             <a href="#about" class="block text-sm font-bold uppercase tracking-widest py-2">О нас</a>
             <a href="#products" class="block text-sm font-bold uppercase tracking-widest py-2">Продукция</a>
+            <a href="#reviews" class="block text-sm font-bold uppercase tracking-widest py-2">Отзывы</a>
             <a href="#contact" class="block text-sm font-bold uppercase tracking-widest py-2">Заказать</a>
         </div>
     </header>
@@ -160,7 +172,7 @@
                 <div class="reveal-left">
                     <h2 class="text-3xl md:text-5xl font-black uppercase mb-8 leading-tight">
                         Почему выбирают <br>
-                        <img src="img/hflogo.jpg" alt="HARD FORMA" class="inline-block h-10 md:h-12 mt-3 object-contain">
+                        <img src="img/hflogo.png" alt="HARD FORMA" class="inline-block h-10 md:h-12 mt-3 object-contain">
                     </h2>
                     <p class="text-zinc-400 text-lg mb-12 leading-relaxed italic border-l-4 border-orange-500 pl-6">
                         "Мы не просто используем металл — мы создаем надежный фундамент для вашего дела. Будь то гараж мечты или современный офис."
@@ -345,6 +357,42 @@
         
     </section>
 
+    <!-- Отзывы клиентов -->
+    <section id="reviews" class="py-32 bg-zinc-950 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 mb-20 text-center reveal-up">
+            <h2 class="text-4xl md:text-6xl font-black uppercase mb-4 tracking-tighter">Отзывы клиентов</h2>
+            <div class="h-1 w-20 bg-orange-500 mx-auto"></div>
+        </div>
+
+        <!-- Контейнер бесконечной карусели -->
+        <div class="relative w-full flex overflow-hidden reveal-up delay-100">
+            <!-- Градиенты по краям для эффекта растворения -->
+            <div class="absolute left-0 top-0 bottom-0 w-16 md:w-48 bg-gradient-to-r from-zinc-950 to-transparent z-10 pointer-events-none"></div>
+            <div class="absolute right-0 top-0 bottom-0 w-16 md:w-48 bg-gradient-to-l from-zinc-950 to-transparent z-10 pointer-events-none"></div>
+
+            <!-- Сама движущаяся лента (состоит из двух одинаковых блоков для бесшовности) -->
+            <div class="flex animate-scroll-right w-max">
+                <!-- Первый блок картинок -->
+                <div class="flex gap-4 md:gap-8 pr-4 md:pr-8">
+                    <!-- Замените пути в src на реальные скриншоты или фото отзывов -->
+                    <img src="img/reviews/1.jpg" alt="[Отзыв клиента]" class="flex-shrink-0 w-[260px] md:w-[350px] h-[350px] md:h-[450px] object-cover border border-zinc-800 rounded-sm">
+                    <img src="img/reviews/2.jpg" alt="[Отзыв клиента]" class="flex-shrink-0 w-[260px] md:w-[350px] h-[350px] md:h-[450px] object-cover border border-zinc-800 rounded-sm">
+                    <img src="img/reviews/1.jpg" alt="[Отзыв клиента]" class="flex-shrink-0 w-[260px] md:w-[350px] h-[350px] md:h-[450px] object-cover border border-zinc-800 rounded-sm">
+                    <img src="img/reviews/2.jpg" alt="[Отзыв клиента]" class="flex-shrink-0 w-[260px] md:w-[350px] h-[350px] md:h-[450px] object-cover border border-zinc-800 rounded-sm">
+                    <img src="img/reviews/1.jpg" alt="[Отзыв клиента]" class="flex-shrink-0 w-[260px] md:w-[350px] h-[350px] md:h-[450px] object-cover border border-zinc-800 rounded-sm">
+                </div>
+                <!-- Второй блок картинок (Точная копия первого, нужна для бесконечного лупа) -->
+                <div class="flex gap-4 md:gap-8 pr-4 md:pr-8">
+                    <img src="img/reviews/1.jpg" alt="[Отзыв клиента]" class="flex-shrink-0 w-[260px] md:w-[350px] h-[350px] md:h-[450px] object-cover border border-zinc-800 rounded-sm">
+                    <img src="img/reviews/2.jpg" alt="[Отзыв клиента]" class="flex-shrink-0 w-[260px] md:w-[350px] h-[350px] md:h-[450px] object-cover border border-zinc-800 rounded-sm">
+                    <img src="img/reviews/1.jpg" alt="[Отзыв клиента]" class="flex-shrink-0 w-[260px] md:w-[350px] h-[350px] md:h-[450px] object-cover border border-zinc-800 rounded-sm">
+                    <img src="img/reviews/2.jpg" alt="[Отзыв клиента]" class="flex-shrink-0 w-[260px] md:w-[350px] h-[350px] md:h-[450px] object-cover border border-zinc-800 rounded-sm">
+                    <img src="img/reviews/1.jpg" alt="[Отзыв клиента]" class="flex-shrink-0 w-[260px] md:w-[350px] h-[350px] md:h-[450px] object-cover border border-zinc-800 rounded-sm">
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Слайдер (Модальное окно) -->
     <div id="slider-modal" class="fixed inset-0 z-[100] bg-zinc-950/95 hidden items-center justify-center p-4 backdrop-blur-sm">
         <button onclick="closeSlider()" class="absolute top-6 right-6 text-white hover:text-orange-500 transition-all z-[110]">
@@ -381,41 +429,77 @@
     </div>
 
     <!-- Форма связи -->
-    <section id="contact" class="py-32 relative bg-zinc-950">
-        <div class="max-w-4xl mx-auto px-6">
-            <div class="bg-orange-600 p-8 md:p-16 custom-shadow relative overflow-hidden reveal-scale">
+    <section id="contact" class="py-32 relative bg-zinc-950 border-t border-zinc-900">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
 
-                <div class="relative z-10 text-center mb-12">
-                    <h2 class="text-3xl md:text-5xl font-black uppercase mb-4"></h2>
-                    <p class="text-orange-100 font-medium">Оставьте заявку, и наш мастер свяжется с вами для уточнения деталей.</p>
-                </div>
-
-                <form id="contact-form" class="space-y-4 max-w-lg mx-auto">
-                    <div class="grid md:grid-cols-2 gap-4">
-                        <input type="text" id="name-input" required placeholder="Имя" class="w-full p-4 bg-white/10 border border-white/20 text-white placeholder:text-white/60 outline-none focus:bg-white/20 transition font-bold">
-                        <input type="tel" id="phone-input" required 
-                               pattern="\+7[0-9]{10}" 
-                               title="Формат: +79831564728"
-                               placeholder="+7 (___) ___ __ __" 
-                               class="w-full p-4 bg-white/10 border border-white/20 text-white placeholder:text-white/60 outline-none focus:bg-white/20 transition font-bold">
-                    </div>
-                    <textarea id="message-input" placeholder="Ваш вопрос (можно оставить пустым)" class="w-full p-4 bg-white/10 border border-white/20 text-white placeholder:text-white/60 h-32 outline-none focus:bg-white/20 transition font-bold"></textarea>
+                <!-- Левая часть: Текст и призыв -->
+                <div class="reveal-left">
+                    <h2 class="text-4xl md:text-6xl font-black uppercase mb-6 tracking-tighter">Обсудите<br><span class="text-orange-500">проект</span></h2>
+                    <div class="h-1 w-20 bg-orange-500 mb-8"></div>
+                    <p class="text-zinc-400 text-lg mb-8 leading-relaxed">
+                        Оставьте заявку, и наш мастер свяжется с вами для уточнения деталей. Мы готовы обсудить индивидуальные размеры, комплектацию и другие ваши пожелания.
+                    </p>
                     
-                    <button type="submit" id="submit-btn" class="w-full bg-zinc-950 text-white font-black uppercase py-5 tracking-widest hover:bg-black transition-colors transform active:scale-[0.98]">
-                        Отправить заявку
-                    </button>
-                </form>
-
-                <div id="success-msg" class="hidden absolute inset-0 bg-zinc-950 flex flex-col items-center justify-center text-center p-8 z-20">
-                    <div class="w-16 h-16 border-4 border-orange-500 rounded-full flex items-center justify-center mb-6">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
-                        </svg>
+                    <!-- Декоративный элемент / Преимущество -->
+                    <div class="flex items-center space-x-4 mb-8">
+                        <div class="w-14 h-14 bg-zinc-900 flex items-center justify-center border border-zinc-800">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-zinc-100 font-bold uppercase tracking-widest text-sm">Индивидуальный подход</p>
+                            <p class="text-zinc-500 text-xs mt-1">Адаптируем мебель под ваши задачи</p>
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-black uppercase mb-2">Заявка принята!</h3>
-                    <p class="text-zinc-400 mb-8">Мастер перезвонит вам в течение 30 минут.</p>
-                    <button onclick="resetForm()" class="text-orange-500 font-bold uppercase text-xs border-b border-orange-500">Вернуться</button>
                 </div>
+
+                <!-- Правая часть: Сама форма -->
+                <div class="reveal-right">
+                    <div class="bg-zinc-900 p-8 md:p-10 border border-zinc-800 relative overflow-hidden custom-shadow">
+                        <!-- Декоративная линия сверху карточки -->
+                        <div class="absolute top-0 left-0 w-full h-1 bg-orange-500"></div>
+
+                        <form id="contact-form" class="space-y-6 relative z-10">
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="space-y-2">
+                                    <label class="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500">Ваше имя</label>
+                                    <input type="text" id="name-input" required placeholder="Иван Иванов" class="w-full p-4 bg-zinc-950 border border-zinc-800 text-white placeholder:text-zinc-700 outline-none focus:border-orange-500 transition-colors duration-300 font-medium">
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500">Телефон</label>
+                                    <input type="tel" id="phone-input" required 
+                                           pattern="\+7[0-9]{10}" 
+                                           title="Формат: +79831564728"
+                                           placeholder="+7 (___) ___ __ __" 
+                                           class="w-full p-4 bg-zinc-950 border border-zinc-800 text-white placeholder:text-zinc-700 outline-none focus:border-orange-500 transition-colors duration-300 font-medium">
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500">Сообщение или вопрос</label>
+                                <textarea id="message-input" placeholder="Какой верстак вас интересует?" class="w-full p-4 bg-zinc-950 border border-zinc-800 text-white placeholder:text-zinc-700 h-32 outline-none focus:border-orange-500 transition-colors duration-300 font-medium resize-none"></textarea>
+                            </div>
+                            
+                            <button type="submit" id="submit-btn" class="w-full bg-orange-600 text-white font-black uppercase py-5 tracking-widest hover:bg-orange-700 transition-all duration-300 transform active:scale-[0.98]">
+                                Отправить заявку
+                            </button>
+                        </form>
+
+                        <!-- Сообщение об успешной отправке -->
+                        <div id="success-msg" class="hidden absolute inset-0 bg-zinc-900/95 backdrop-blur-sm flex flex-col items-center justify-center text-center p-8 z-20">
+                            <div class="w-16 h-16 border-4 border-orange-500 rounded-full flex items-center justify-center mb-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-black uppercase mb-2 text-white">Заявка принята!</h3>
+                            <p class="text-zinc-400 mb-8">Мастер перезвонит вам в течение 30 минут.</p>
+                            <button onclick="resetForm()" class="text-orange-500 font-bold uppercase text-xs border-b border-orange-500 pb-1 hover:text-orange-400 transition-colors">Отправить еще</button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
