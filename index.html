@@ -480,7 +480,7 @@
                 </div>
 
                 <!-- Правая часть: Сама форма -->
-                <div class="reveal-right">
+                <div id="form-scroll-target"  class="reveal-right">
                     <div class="bg-zinc-900 p-8 md:p-10 border border-zinc-800 relative overflow-hidden custom-shadow">
                         <!-- Декоративная линия сверху карточки -->
                         <div class="absolute top-0 left-0 w-full h-1 bg-orange-500"></div>
@@ -804,7 +804,9 @@
             const messageInput = document.getElementById('message-input');
             messageInput.value = `Здравствуйте! Меня интересует ${productName}.`;
             
-            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+            // На мобильных экранах (меньше 1024px) скроллим прямо к самой форме
+            const scrollTarget = window.innerWidth < 1024 ? 'form-scroll-target' : 'contact';
+            document.getElementById(scrollTarget).scrollIntoView({ behavior: 'smooth' });
             
             setTimeout(() => {
                 messageInput.focus();
