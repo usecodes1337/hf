@@ -545,14 +545,6 @@
 
     <!-- Скрипты -->
     <script>
-        // ==========================================
-        // НАСТРОЙКИ MAX БОТА (ВСТАВЬТЕ СВОИ ДАННЫЕ)
-        // ==========================================
-        const MAX_BOT_TOKEN = 'f9LHodD0cOLvuekJkgTYrppadPYU4abe5K1ZNc2d-wsIWbad6TyWrarVNJRPyfVrWGE8HC9Sc9bwUvwTQW_N';
-        // Укажите ID чата/группы, куда бот должен присылать заявки
-        const MAX_CHAT_IDS = ['-72492452752012'];
-        // ==========================================
-
         // ЛОГИКА ЭКРАНА ЗАГРУЗКИ
         window.addEventListener('load', () => {
             const loader = document.getElementById('site-loader');
@@ -713,7 +705,7 @@
         });
 
         // ==========================================
-        // ОТПРАВКА ДАННЫХ В MAX MESSENGER
+        // ОТПРАВКА ДАННЫХ В MAX (ЧЕРЕЗ PHP)
         // ==========================================
         const form = document.getElementById('contact-form');
         const successMsg = document.getElementById('success-msg');
@@ -722,68 +714,38 @@
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            // Получаем значения полей
             const name = document.getElementById('name-input').value;
             const phone = document.getElementById('phone-input').value;
             const message = document.getElementById('message-input').value;
 
-            // Блокируем кнопку на время отправки
             submitBtn.innerText = 'Отправка...';
             submitBtn.disabled = true;
             submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
 
-            if (MAX_BOT_TOKEN === 'ВАШ_ТОКЕН_БОТА_MAX' || !MAX_BOT_TOKEN) {
-                // Заглушка, если токен не указан (для тестирования верстки)
-                setTimeout(() => {
-                    successMsg.classList.remove('hidden');
-                    successMsg.classList.add('flex');
-                    
-                    submitBtn.innerText = 'Отправить заявку';
-                    submitBtn.disabled = false;
-                    submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
-                }, 1000);
-                return;
-            }
-
-            // Формируем текст сообщения для MAX (используем Markdown)
-            const maxMessageText = `🛠 *Новая заявка (HARDFORMA)*\n\n` +
-                                   `👤 *Имя:* ${name}\n` +
-                                   `📞 *Телефон:* ${phone}\n` +
-                                   `💬 *Пожелания:* ${message || 'Не указаны'}`;
-
-            // URL для отправки Markdown-сообщения через API MAX
-            const apiUrl = 'https://platform-api.max.ru/message/markdown';
-
             try {
-                const sendPromises = MAX_CHAT_IDS.map(chatId => {
-                    return fetch(apiUrl, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${MAX_BOT_TOKEN}`
-                        },
-                        body: JSON.stringify({
-                            chat_id: chatId.trim(),
-                            text: maxMessageText
-                        })
-                    });
+                // Стучимся в наш файл send.php
+                const response = await fetch('send.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ name, phone, message })
                 });
 
-                const responses = await Promise.all(sendPromises);
-                const allSuccessful = responses.every(res => res.ok);
+                const result = await response.json();
 
-                if (allSuccessful) {
+                if (response.ok && result.status === 'success') {
+                    // Все супер, показываем окно успеха
                     successMsg.classList.remove('hidden');
                     successMsg.classList.add('flex');
                 } else {
-                    const failedResponse = responses.find(res => !res.ok);
-                    const errorText = await failedResponse.text();
-                    console.error('Ошибка MAX API:', errorText);
-                    alert('Ошибка отправки в MAX. Проверьте консоль браузера для деталей.');
+                    // Ошибка со стороны MAX (выводим в консоль для отладки)
+                    console.error('Ошибка от сервера MAX:', result.details);
+                    alert('Не удалось отправить в MAX. Загляните в консоль.');
                 }
             } catch (error) {
-                console.error('Ошибка сети:', error);
-                alert('Произошла сетевая ошибка при отправке заявки.');
+                console.error('Сетевая ошибка:', error);
+                alert('Сетевая ошибка. Возможно, вы запускаете сайт без сервера?');
             } finally {
                 submitBtn.innerText = 'Отправить заявку';
                 submitBtn.disabled = false;
