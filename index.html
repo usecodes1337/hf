@@ -459,7 +459,7 @@
 
                 <!-- Левая часть: Текст и призыв -->
                 <div class="reveal-left">
-                    <h2 class="text-4xl md:text-6xl font-black uppercase mb-6 tracking-tighter">Задать<br><span class="text-orange-500">вопрос</span></h2>
+                    <h2 class="text-4xl md:text-6xl font-black uppercase mb-6 tracking-tighter">Задать <span class="text-orange-500">вопрос</span></h2>
                     <div class="h-1 w-20 bg-orange-500 mb-8"></div>
                     <p class="text-zinc-400 text-lg mb-8 leading-relaxed">
                         Оставьте заявку, и наш мастер свяжется с вами для уточнения деталей. Мы готовы обсудить индивидуальные размеры, комплектацию и другие ваши пожелания.
@@ -546,10 +546,11 @@
     <!-- Скрипты -->
     <script>
         // ==========================================
-        // НАСТРОЙКИ TELEGRAM БОТА (ВСТАВЬТЕ СВОИ ДАННЫЕ)
+        // НАСТРОЙКИ MAX БОТА (ВСТАВЬТЕ СВОИ ДАННЫЕ)
         // ==========================================
-        const TELEGRAM_BOT_TOKEN = '8211955069:AAHEK_6xFE6my_08jNQE2PCaVx5RCdOUXrc';
-        const TELEGRAM_CHAT_IDS = ['931696118', '1004619614', '915250760'];
+        const MAX_BOT_TOKEN = 'f9LHodD0cOLvuekJkgTYrppadPYU4abe5K1ZNc2d-wsIWbad6TyWrarVNJRPyfVrWGE8HC9Sc9bwUvwTQW_N';
+        // Укажите ID чата/группы, куда бот должен присылать заявки
+        const MAX_CHAT_IDS = ['-72492452752012'];
         // ==========================================
 
         // ЛОГИКА ЭКРАНА ЗАГРУЗКИ
@@ -579,12 +580,9 @@
 
         // ==========================================
         // АНИМАЦИИ ПРИ СКРОЛЛЕ (Intersection Observer)
-        // ОБНОВЛЕНО ДЛЯ БОЛЕЕ ПЛАВНОГО ПОЯВЛЕНИЯ
         // ==========================================
         const observerOptions = {
             root: null,
-            // Сдвигаем границу срабатывания чуть вверх: анимация начнется, когда
-            // элемент появится на экране хотя бы на 10% (решает проблему с задержками на смартфонах)
             rootMargin: '0px 0px -10% 0px', 
             threshold: 0 
         };
@@ -593,12 +591,11 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('reveal-active');
-                    observer.unobserve(entry.target); // Анимируем только один раз
+                    observer.unobserve(entry.target); 
                 }
             });
         }, observerOptions);
 
-        // Находим все элементы для анимации (кроме hero-content, который анимируется при загрузке)
         document.querySelectorAll('.reveal-up:not(#hero-content), .reveal-left, .reveal-right, .reveal-scale').forEach(el => {
             observer.observe(el);
         });
@@ -610,7 +607,6 @@
             const scrolled = window.scrollY;
             const heroBg = document.getElementById('hero-bg');
             if (heroBg) {
-                // Смещаем фон вниз с половинной скоростью скролла
                 heroBg.style.transform = `translateY(${scrolled * 0.4}px) scale(1.05)`;
             }
         }); 
@@ -717,14 +713,14 @@
         });
 
         // ==========================================
-        // ОТПРАВКА ДАННЫХ В TELEGRAM
+        // ОТПРАВКА ДАННЫХ В MAX MESSENGER
         // ==========================================
         const form = document.getElementById('contact-form');
         const successMsg = document.getElementById('success-msg');
         const submitBtn = document.getElementById('submit-btn');
 
         form.addEventListener('submit', async (e) => {
-            e.preventDefault(); // Останавливаем стандартную отправку
+            e.preventDefault();
 
             // Получаем значения полей
             const name = document.getElementById('name-input').value;
@@ -736,7 +732,8 @@
             submitBtn.disabled = true;
             submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
 
-            if (TELEGRAM_BOT_TOKEN === 'ВАШ_ТОКЕН_БОТА' || !TELEGRAM_BOT_TOKEN) {
+            if (MAX_BOT_TOKEN === 'ВАШ_ТОКЕН_БОТА_MAX' || !MAX_BOT_TOKEN) {
+                // Заглушка, если токен не указан (для тестирования верстки)
                 setTimeout(() => {
                     successMsg.classList.remove('hidden');
                     successMsg.classList.add('flex');
@@ -748,26 +745,26 @@
                 return;
             }
 
-            // Формируем текст сообщения для Telegram
-            const telegramMessage = `🛠 *Новая заявка (HARDFORMA)*\n\n` +
-                                    `👤 *Имя:* ${name}\n` +
-                                    `📞 *Телефон:* ${phone}\n` +
-                                    `💬 *Пожелания:* ${message || 'Не указаны'}`;
+            // Формируем текст сообщения для MAX (используем Markdown)
+            const maxMessageText = `🛠 *Новая заявка (HARDFORMA)*\n\n` +
+                                   `👤 *Имя:* ${name}\n` +
+                                   `📞 *Телефон:* ${phone}\n` +
+                                   `💬 *Пожелания:* ${message || 'Не указаны'}`;
 
-            // API URL
-            const apiUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+            // URL для отправки Markdown-сообщения через API MAX
+            const apiUrl = 'https://platform-api.max.ru/message/markdown';
 
             try {
-                const sendPromises = TELEGRAM_CHAT_IDS.map(chatId => {
+                const sendPromises = MAX_CHAT_IDS.map(chatId => {
                     return fetch(apiUrl, {
                         method: 'POST',
                         headers: {
-                            'Content-Type': 'application/json'
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${MAX_BOT_TOKEN}`
                         },
                         body: JSON.stringify({
                             chat_id: chatId.trim(),
-                            text: telegramMessage,
-                            parse_mode: 'Markdown'
+                            text: maxMessageText
                         })
                     });
                 });
@@ -780,12 +777,13 @@
                     successMsg.classList.add('flex');
                 } else {
                     const failedResponse = responses.find(res => !res.ok);
-                    const errorData = await failedResponse.json();
-                    alert(`Ошибка Telegram: ${errorData.description || 'Проверьте токен и Chat ID'}`);
+                    const errorText = await failedResponse.text();
+                    console.error('Ошибка MAX API:', errorText);
+                    alert('Ошибка отправки в MAX. Проверьте консоль браузера для деталей.');
                 }
             } catch (error) {
-                console.error('Ошибка:', error);
-                alert('Произошла сетевая ошибка при отправке заявки. Убедитесь, что токен бота введен верно.');
+                console.error('Ошибка сети:', error);
+                alert('Произошла сетевая ошибка при отправке заявки.');
             } finally {
                 submitBtn.innerText = 'Отправить заявку';
                 submitBtn.disabled = false;
